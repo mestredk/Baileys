@@ -520,11 +520,11 @@ export const generateWAMessageContent = async(
 			buttons: message.buttons.map(b => ({ ...b, type: proto.Message.ButtonsMessage.Button.Type.RESPONSE }))
 		}
 		if('text' in message) {
-			buttonsMessage.contentText = message.text
+			buttonsMessage.contentText = message.text as string || ''
 			buttonsMessage.headerType = ButtonType.EMPTY
 		} else {
 			if('caption' in message) {
-				buttonsMessage.contentText = message.caption
+				buttonsMessage.contentText = message.caption as string || ''
 			}
 
 			const type = Object.keys(m)[0].replace('Message', '').toUpperCase()
@@ -544,11 +544,11 @@ export const generateWAMessageContent = async(
 		}
 
 		if('text' in message) {
-			msg.hydratedContentText = message.text
+			msg.hydratedContentText = message.text as string || ''
 		} else {
 
 			if('caption' in message) {
-				msg.hydratedContentText = message.caption
+				msg.hydratedContentText = message.caption as string || ''
 			}
 
 			Object.assign(msg, m)
@@ -572,7 +572,7 @@ export const generateWAMessageContent = async(
 			buttonText: message.buttonText,
 			title: message.title,
 			footerText: message.footer,
-			description: message.text,
+			description: message.text as string || '',
 			listType: proto.Message.ListMessage.ListType.SINGLE_SELECT
 		}
 
